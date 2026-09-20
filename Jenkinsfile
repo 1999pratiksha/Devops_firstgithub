@@ -51,7 +51,7 @@ pipeline
             }
         }
         stage('Parallel test'){
-            Parallel{
+            parallel {
                 stage('UI Tests'){
                     steps{
                         script{
