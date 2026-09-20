@@ -21,13 +21,34 @@ pipeline
     stages{
         stage('Checkout'){
             steps{
-                checkout scmGit(branches: [[name: '*/main']],
-                 userRemoteConfigs: [[url:'https://github.com/1999pratiksha/Devops_firstgithub.git']])
+                git branch :'main',
+                url: 'https://github.com/1999pratiksha/Devops_firstgithub.git'
+
+                //through jenkins snippet generator
+                // checkout scmGit(branches: [[name: '*/main']],
+                //  userRemoteConfigs: [[url:'https://github.com/1999pratiksha/Devops_firstgithub.git']])
+        
             }
         }
-        stage('Test'){
+
+        stage('Build'){
             steps{
-                echo 'Running tests'
+                script{
+                    try{
+                        echo "Building ${APP_NAME}",
+                        echo "Version: ${params.APP_VERSION}"
+                        sh'''
+                            echo "Running build"
+                        '''
+                    }
+                    catch(Exception e){
+                        echo "Build Failed"
+                        echo "Error: ${e.getMessage()}"
+                        currentBuild.result="FAILURE"
+                        throw e
+                    }
+                }
+                
             }
         }
         stage('Deploy'){
