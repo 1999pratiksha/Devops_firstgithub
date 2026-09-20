@@ -19,9 +19,10 @@ pipeline
         }
 
     stages{
-        stage('Build'){
+        stage('Checkout'){
             steps{
-                echo 'Building application'
+                checkout scmGit(branches: [[name: '*/main']],
+                 userRemoteConfigs: [[url:'https://github.com/1999pratiksha/Devops_firstgithub.git']])
             }
         }
         stage('Test'){
