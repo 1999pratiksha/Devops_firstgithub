@@ -35,7 +35,7 @@ pipeline
             steps{
                 script{
                     try{
-                        echo "Building ${APP_NAME}",
+                        echo "Building ${APP_NAME}"
                         echo "Version: ${params.APP_VERSION}"
                         //sh 'echo "Running build"'
                         sh '''
