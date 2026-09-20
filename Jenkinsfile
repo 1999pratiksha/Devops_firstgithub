@@ -37,9 +37,7 @@ pipeline
                     try{
                         echo "Building ${APP_NAME}",
                         echo "Version: ${params.APP_VERSION}"
-                        sh'
-                            echo "Running build"
-                        '
+                        sh 'echo "Running build"'
                     }
                     catch(Exception e){
                         echo "Build Failed"
