@@ -50,10 +50,30 @@ pipeline
                 
             }
         }
-        stage('Deploy'){
-            steps{
-                echo 'Deploy application'
+        stage('Parallel test'){
+            Parallel{
+                stage('UI Tests'){
+                    steps{
+                        script{
+                            echo "Running API tests"
+                            try{
+                                sh ''' echo "Executing API test"
+                                echo "Successfully executed API test"
+                                '''
+                            }
+                            catch(Exception e){
+                                echo "API test failed"
+                                echo "Error:${e.getmessage()}"
+                                throw e
+                            }
+                            
+                        }
+                    }
+
+                    
+                }
             }
+            
         }
 
 
